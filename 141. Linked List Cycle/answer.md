@@ -34,8 +34,14 @@ class Solution:
 参考にした[解説](https://leetcode.com/problems/linked-list-cycle/solutions/4829782/python3-3-solutions-and-are-with-math-proofs-hashset-modify-visited-nodes/)
 
 Tortoise and Hare algorithmを使用した回答
+
 時間計算量: O(n)
+
 空間計算量: O(1)
+
+初めこのアルゴリズムを見た時は、どうしてスピードの異なるポインタを使うのかわからなかった。
+
+他の解き方に比べて空間計算量が節約できて、破壊的変更がないのが利点。詳細は下記
 
 ```python
 # Definition for singly-linked list.
@@ -113,3 +119,17 @@ class Solution:
 (curに参照渡ししているから)
 
 よって、Tortoise and hare algorythmの解法を覚えた
+
+**なぜSetにListNodeが追加できるのか**
+
+SetにListNodeのインスタンスを入れられるのか？という旨の疑問を持っている方がいらっしゃった。
+
+普段から何気なく書いていたので、詳しくみてみた。
+
+[要素はハッシュ可能である必要があるらしい](https://docs.python.org/ja/3/library/stdtypes.html#set)
+
+ハッシュ可能とは、不変のハッシュ値をもつということ
+
+[そして自前で定義したクラスはハッシュ可能だそう](https://docs.python.org/ja/3/library/stdtypes.html#set)
+
+よって、Setに追加することはできる。
