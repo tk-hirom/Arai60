@@ -1,3 +1,4 @@
 # 進捗
 ## LinkedList
-- Linked List Cycle
+- 141.Linked List Cycle
+- 142.Linked List Cycle II
