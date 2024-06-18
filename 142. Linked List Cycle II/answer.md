@@ -198,3 +198,37 @@ step3のコードと同じもの描いたのでコードは省略
 1回目 5m
 2回目 5m
 3回目 5m
+
+## step5
+
+Pythonの変数、メソッド名の命名規則を知ったのでそれに沿うように修正
+
+````python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        collision = self.get_collision(head)
+        if not collision:
+            return None
+        from_collision = collision
+        from_head = head
+
+        while from_collision != from_head:
+            from_collision = from_collision.next
+            from_head = from_head.next
+        return from_head
+
+    def get_collision(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        fast = slow = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            if fast == slow:
+                return fast
+
+        return None
+```
