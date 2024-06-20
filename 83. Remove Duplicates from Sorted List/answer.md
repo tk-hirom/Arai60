@@ -34,17 +34,48 @@ leetcodeはもともと定義されているメソッドの返り値は変えて
 
 このメソッド自体が何かのプログラムで呼び出されて結果的にOutputに重複排除したListが出てくるのか？
 
-問題自体よくわからなかったが、とりあえず参照渡することからnextの値を書き換えるというものを書いてみた（多分違うのだろうけど。。。）
+問題理解したので１から解き直してみた
 
 ```python
 class Solution:
     def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
         target = head
 
-        while target:
-            if target != target.next:
-                target = target.next
-                continue
-            target.next = target.next.next
-        return target
+        while target and target.next:
+            if target.val == target.next.val:
+                target.next = target.next.next
+            target = target.next
+        return head
 ```
+
+` [1,1,1] `のように最後のノードの値が重複の時、重複値が残ってしまう実装をしてしまった。
+
+はじめと終わりとかエッジケース考えないといかん
+
+## step2
+
+問題を理解できた。ようは、重複削除した上でLinkedList形式で返せってことか。だから模範解答だと加工した上でhead返しているのか
+
+### leetcodeの解答例
+
+[参考](https://leetcode.com/problems/remove-duplicates-from-sorted-list/solutions/943403/python-simple-solution)
+
+ぱっと見の印象は、コードが処理の羅列になってる。mapなどを使用して文章のように読めるコードにできるのではないか？と思った。
+
+あと、while統合できないか？
+
+```python
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        cur=head
+        while cur:
+            while cur.next and cur.next.val==cur.val:
+                cur.next=cur.next.next
+            cur=cur.next
+        return head
+        
+```
+
+### セルフツッコミ
+
+再帰で書けないか？
